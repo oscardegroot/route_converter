@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="config_file" default="$(find-pkg-share route_converter)/config/settings.yaml" />
+    <arg name="gate_delay" default="0.0" />
+
+    <node pkg="route_converter" exec="route_converter_node" name="route_converter_node" respawn="true" output="screen">
+        <param from="$(find-pkg-share route_converter)/config/settings.yaml"/>
+        <remap from="~/input/vector_map" to="/map/vector_map"/>
+        <remap from="~/input/route" to="/planning/mission_planning/route"/>
+        <remap from="~/input/odometry" to="/localization/kinematic_state"/>
+        <remap from="~/input/goal" to="/planning/mission_planning/goal"/>
+        <remap from="~/output/path_with_lane_id" to="/roadmap/path_with_lane_id"/>
+        <remap from="~/output/goal_reached" to="/route_converter/goal_reached"/>
+    </node>
+
+</launch>  

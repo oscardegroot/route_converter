@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>route_converter</name>
+  <version>0.0.0</version>
+  <description>The roadmap package</description>
+
+
+  <maintainer email="r2c1@todo.todo">r2c1</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+
+  <depend>geometry_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>nav_msgs</depend>
+
+  <depend>ros_tools</depend>
+  <depend>route_handler</depend>
+
+  <depend>autoware_auto_planning_msgs</depend>
+  <depend>autoware_auto_mapping_msgs</depend>
+  <depend>autoware_planning_msgs</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
