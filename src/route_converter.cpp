@@ -19,7 +19,7 @@ namespace
 RouteConverter::RouteConverter()
     : rclcpp::Node("route_converter")
 {
-        route_handler_ = std::make_shared<route_handler::RouteHandler>();
+        route_handler_ = std::make_shared<autoware::route_handler::RouteHandler>();
         STATIC_NODE_POINTER.init(this);
 }
 
@@ -36,7 +36,7 @@ void RouteConverter::initialize()
         auto qos_transient_local = rclcpp::QoS{1}.transient_local();
 
         // The map of the world
-        vector_map_subscriber_ = this->create_subscription<HADMapBin>(
+        vector_map_subscriber_ = this->create_subscription<LaneletMapBin>(
             "~/input/vector_map", qos_transient_local,
             std::bind(&RouteConverter::onMap, this, _1),
             createSubscriptionOptions(this));
@@ -135,7 +135,7 @@ void RouteConverter::onOdometry(Odometry::ConstSharedPtr msg)
         }
 }
 
-void RouteConverter::onMap(HADMapBin::ConstSharedPtr msg)
+void RouteConverter::onMap(LaneletMapBin::ConstSharedPtr msg)
 {
         if (config_->debug_output_)
         {
@@ -196,7 +196,7 @@ void RouteConverter::getReferencePath(PathWithLaneId &reference_path, lanelet::C
         /** @see behavior_path_planner/planner manager */
 
         geometry_msgs::msg::Pose cur_pose = odometry_ptr_->pose.pose;
-        // PathWithLaneId reference_path{}, extended_reference_path{}; // The final reference path
+        // Path reference_path{}, extended_reference_path{}; // The final reference path
 
         const auto backward_length = config_->autoware_backward_distance_; // How far back should the path go
         const auto forward_length = config_->autoware_forward_distance_;   // How far forward should the path go
@@ -427,7 +427,7 @@ void RouteConverter::convertRoute(PathWithLaneId &reference_path, const lanelet:
         // Fit a velocity reference based on the curvature of the path
 
         // Convert to nav path and forward to the rest of the roadmap
-        // WaypointCallback(ConvertAutowarePathWithLaneIdToNavPath(reference_path));
+        // WaypointCallback(ConvertAutowarePathToNavPath(reference_path));
 
         if (config_->debug_output_)
                 LOG_SUCCESS("Published reference path!");

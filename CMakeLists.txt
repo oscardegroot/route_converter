@@ -12,10 +12,9 @@ set(DEPENDENCIES
   nav_msgs
   std_msgs
   ros_tools
-  route_handler
-  autoware_auto_planning_msgs
-  autoware_auto_mapping_msgs
+  autoware_route_handler
   autoware_planning_msgs
+  autoware_map_msgs
 )
 
 find_package(ament_cmake REQUIRED)

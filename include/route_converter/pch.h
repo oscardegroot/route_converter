@@ -13,10 +13,10 @@
 #include <lanelet2_extension/utility/query.hpp>              // See route-handler
 #include <lanelet2_extension/utility/message_conversion.hpp> // See route-handler
 
-#include <autoware_auto_mapping_msgs/msg/had_map_bin.hpp>
+#include <autoware_map_msgs/msg/lanelet_map_bin.hpp>
 #include <autoware_planning_msgs/msg/lanelet_route.hpp>
-#include <autoware_auto_planning_msgs/msg/path.hpp>
-#include <autoware_auto_planning_msgs/msg/path_with_lane_id.hpp>
+#include <autoware_planning_msgs/msg/path.hpp>
+// #include <autoware_planning_msgs/msg/path_with_lane_id.hpp>
 
 #include <geometry_msgs/msg/pose_with_covariance_stamped.hpp>
 #include <geometry_msgs/msg/point.hpp>
@@ -24,7 +24,7 @@
 #include <nav_msgs/msg/path.hpp>
 #include <std_msgs/msg/empty.hpp>
 
-#include <route_handler/route_handler.hpp>
+#include <autoware/route_handler/route_handler.hpp>
 
 #include <ros_tools/logging.h>
 #include <ros_tools/visuals.h>

@@ -3,9 +3,9 @@
 
 #include "route_converter/pch.h"
 
-using autoware_auto_mapping_msgs::msg::HADMapBin;
-using autoware_auto_planning_msgs::msg::Path;
-using autoware_auto_planning_msgs::msg::PathWithLaneId;
+using autoware_map_msgs::msg::LaneletMapBin;
+using autoware_planning_msgs::msg::Path;
+using tier4_planning_msgs::msg::PathWithLaneId;
 using autoware_planning_msgs::msg::LaneletRoute;
 using geometry_msgs::msg::PoseWithCovarianceStamped;
 using nav_msgs::msg::Odometry;
@@ -34,7 +34,7 @@ public:
     // Trigger a map recompute when respawning
     void onInitialPose(PoseWithCovarianceStamped::ConstSharedPtr msg);
     void onOdometry(Odometry::ConstSharedPtr msg);
-    void onMap(HADMapBin::ConstSharedPtr msg);
+    void onMap(LaneletMapBin::ConstSharedPtr msg);
     void onRoute(LaneletRoute::ConstSharedPtr msg);
     void onGoal(geometry_msgs::msg::PoseStamped::ConstSharedPtr msg);
 
@@ -58,8 +58,8 @@ private:
     Eigen::Vector2d goal_;
     double goal_angle_;
 
-    rclcpp::Subscription<HADMapBin>::SharedPtr vector_map_subscriber_; /** Subscriber for external waypoints */
-    HADMapBin::ConstSharedPtr map_ptr_{nullptr};
+    rclcpp::Subscription<LaneletMapBin>::SharedPtr vector_map_subscriber_; /** Subscriber for external waypoints */
+    LaneletMapBin::ConstSharedPtr map_ptr_{nullptr};
 
     rclcpp::Subscription<LaneletRoute>::SharedPtr route_subscriber_; /** Subscriber for external waypoints */
     LaneletRoute::ConstSharedPtr route_ptr_{nullptr};
@@ -75,6 +75,6 @@ private:
     rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr reference_pub_;
     rclcpp::Publisher<std_msgs::msg::Empty>::SharedPtr goal_reached_publisher_;
 
-    std::shared_ptr<route_handler::RouteHandler> route_handler_;
+    std::shared_ptr<autoware::route_handler::RouteHandler> route_handler_;
 };
 #endif
