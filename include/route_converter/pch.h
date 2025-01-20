@@ -10,8 +10,8 @@
 #include <vector>
 
 #include <lanelet2_core/geometry/Lanelet.h>
-#include <lanelet2_extension/utility/query.hpp>              // See route-handler
-#include <lanelet2_extension/utility/message_conversion.hpp> // See route-handler
+#include <autoware_lanelet2_extension/utility/query.hpp>              // See route-handler
+#include <autoware_lanelet2_extension/utility/message_conversion.hpp> // See route-handler
 
 #include <autoware_map_msgs/msg/lanelet_map_bin.hpp>
 #include <autoware_planning_msgs/msg/lanelet_route.hpp>
