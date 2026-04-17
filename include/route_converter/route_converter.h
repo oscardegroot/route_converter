@@ -5,7 +5,7 @@
 
 using autoware_map_msgs::msg::LaneletMapBin;
 using autoware_planning_msgs::msg::Path;
-using tier4_planning_msgs::msg::PathWithLaneId;
+using autoware_internal_planning_msgs::msg::PathWithLaneId;
 using autoware_planning_msgs::msg::LaneletRoute;
 using geometry_msgs::msg::PoseWithCovarianceStamped;
 using nav_msgs::msg::Odometry;
