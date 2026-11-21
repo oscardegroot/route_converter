@@ -66,6 +66,7 @@ private:
 
     rclcpp::Subscription<Odometry>::SharedPtr odometry_subscriber_; /** Subscriber for external waypoints */
     Odometry::ConstSharedPtr odometry_ptr_{nullptr};
+    Odometry::ConstSharedPtr latest_odometry_ptr_{nullptr}; /** Most recent odometry, used when a route arrives */
 
     rclcpp::Subscription<geometry_msgs::msg::PoseStamped>::SharedPtr goal_pose_subscriber_; /** Subscriber for external waypoints */
 
