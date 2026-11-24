@@ -96,6 +96,7 @@ void RouteConverter::onGoal(geometry_msgs::msg::PoseStamped::ConstSharedPtr msg)
 
 void RouteConverter::onOdometry(Odometry::ConstSharedPtr msg)
 {
+        latest_odometry_ptr_ = msg;
         if (!odometry_ptr_)
         {
                 if (config_->debug_output_)
@@ -150,6 +151,13 @@ void RouteConverter::onRoute(LaneletRoute::ConstSharedPtr msg)
         {
                 LOG_INFO("Route Received");
         }
+
+        // The goal of the route itself: a route set through the AD API publishes nothing on the goal topic.
+        goal_ = Eigen::Vector2d(msg->goal_pose.position.x, msg->goal_pose.position.y);
+        goal_angle_ = RosTools::quaternionToAngle(msg->goal_pose.orientation);
+        // Build the path from where the vehicle is now, not from where it was when the first route arrived.
+        if (latest_odometry_ptr_)
+                odometry_ptr_ = latest_odometry_ptr_;
 
         // We need the map to understand the route
         if (!map_ptr_)

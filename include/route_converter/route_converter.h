@@ -5,7 +5,7 @@
 
 using autoware_map_msgs::msg::LaneletMapBin;
 using autoware_planning_msgs::msg::Path;
-using tier4_planning_msgs::msg::PathWithLaneId;
+using autoware_internal_planning_msgs::msg::PathWithLaneId;
 using autoware_planning_msgs::msg::LaneletRoute;
 using geometry_msgs::msg::PoseWithCovarianceStamped;
 using nav_msgs::msg::Odometry;
@@ -66,6 +66,7 @@ private:
 
     rclcpp::Subscription<Odometry>::SharedPtr odometry_subscriber_; /** Subscriber for external waypoints */
     Odometry::ConstSharedPtr odometry_ptr_{nullptr};
+    Odometry::ConstSharedPtr latest_odometry_ptr_{nullptr}; /** Most recent odometry, used when a route arrives */
 
     rclcpp::Subscription<geometry_msgs::msg::PoseStamped>::SharedPtr goal_pose_subscriber_; /** Subscriber for external waypoints */
 
